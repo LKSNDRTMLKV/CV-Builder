@@ -1,0 +1,12 @@
+a {
+  text-decoration: none!important;
+}
+
+#root {
+  background-image: url('./images/backgrounds/background.png');
+  
+  min-height: 92vh;
+  max-height: fit-content;
+  
+  padding-top: 8vh;
+}
