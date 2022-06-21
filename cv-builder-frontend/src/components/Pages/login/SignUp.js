@@ -1,4 +1,4 @@
-import { Button, Grid, Icon, IconButton, InputAdornment, Tooltip} from '@mui/material';
+import { Button, Grid, Icon, IconButton, InputAdornment, Tooltip } from '@mui/material';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { UserActions } from '../../../actions/UserActions';
@@ -17,9 +17,9 @@ const SignUp = (props) => {
     const { loggedIn, setLoggedIn } = useContext(Context);
 
     useEffect(() => {
-        if(loggedIn) {
-        handleNavigation()
-    }
+        if (loggedIn) {
+            handleNavigation()
+        }
     }, [])
 
     const [credentials, setCredentials] = useState({
@@ -35,10 +35,10 @@ const SignUp = (props) => {
 
     const [passwordVisibility, setPasswordVisibility] = useState(false);
 
-    const handleNavigation= () => {
-        
-            navigate(API.paths.home);
-        
+    const handleNavigation = () => {
+
+        navigate(API.paths.home);
+
     }
 
     const handleChange = (e) => {
@@ -48,36 +48,47 @@ const SignUp = (props) => {
 
     const handleSubmit = (e) => {
 
+        
+
         async function fetchData() {
             let response = await UserActions.SignUpAsync(credentials);
             if (!response.error) {
-                if(response.data) {
-                    setMessageData({Message: response.data.status});
-                    localStorageHelper.SaveItem("AUTH_TOKEN", response.data.user);
+                if (response.data) {
+                    const userData = response.data.user;
+
+                    setMessageData({ Message: response.data.status });
+                    setValidationMessages([]);
+
+                    // delete Object.assign(userData, {id: userData._id})['_id'];
+                    localStorageHelper.SaveItem("AUTH_TOKEN", userData);
                     setLoggedIn(true);
                     handleNavigation();
                 }
             }
             else {
-                if(response.validationMessages) {
+                if (response.validationMessages) {
                     setValidationMessages(response.validationMessages);
                 }
-               
-            }   
+
+            }
         }
         fetchData();
     }
 
     return (
-        <Grid container 
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        sx={{mt:20}}
+        <Grid container
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mt: 20 }}
         >
+
+            <AlertMessage {...messageData} />
+        
+
             <Grid item xs={12}>
                 <MyTextField
-                initialWidth
+                    initialWidth
                     id="fullName"
                     label="Full Name"
                     name="fullName"
@@ -90,7 +101,7 @@ const SignUp = (props) => {
             </Grid>
             <Grid item xs={12}>
                 <MyTextField
-                initialWidth
+                    initialWidth
                     id="username"
                     label="Username"
                     name="username"
@@ -103,7 +114,7 @@ const SignUp = (props) => {
             </Grid>
             <Grid item xs={12}>
                 <MyTextField
-                initialWidth
+                    initialWidth
                     id="email"
                     label="Email"
                     name="email"
@@ -117,7 +128,7 @@ const SignUp = (props) => {
             </Grid>
             <Grid item xs={12}>
                 <MyTextField
-                initialWidth
+                    initialWidth
                     id="password"
                     label="Password"
                     name="password"
@@ -141,17 +152,17 @@ const SignUp = (props) => {
 
             </Grid>
 
-            <Grid item xs={6} sx={{my:2}}>
+            <Grid item xs={6} sx={{ my: 2 }}>
                 <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ minWidth: "25ch" }} >
                     Sign Up
                 </Button>
             </Grid>
 
             <Grid item xs={6}>
-                    <Link to={API.paths.sign_in}>
-                            Have an account? Sign In!
-                    </Link>
-                </Grid>
+                <Link to={API.paths.sign_in}>
+                    Have an account? Sign In!
+                </Link>
+            </Grid>
 
         </Grid>
     );

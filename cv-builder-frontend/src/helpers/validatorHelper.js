@@ -24,7 +24,7 @@ function validate(inputJSON) {
             if (input.value === "" || input.value === null) {
                 invalidField = true;
             }
-            else if (input.value.length < 5) {
+            else if (input.value.length < 5 ) {
                 invalidField = true;
             }
         }

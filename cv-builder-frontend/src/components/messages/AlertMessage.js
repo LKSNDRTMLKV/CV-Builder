@@ -35,7 +35,7 @@ const AlertMessage = (props) => {
     const [snackBarAttributes, setSnackBarAttributes] = useState({
       vertical: 'top',
       horizontal: 'right',
-      transition: Grow,
+      transition: Slide,
     })
     const {vertical,horizontal,transition} = snackBarAttributes;
   

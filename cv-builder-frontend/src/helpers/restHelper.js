@@ -39,7 +39,7 @@ const Patch = async (apiEndpoint,payload) => {
     )
 }
 const Put = async (apiEndpoint,payload) => {
-    return await axios.Put(API.url + apiEndpoint, payload)
+    return await axios.put(API.url + apiEndpoint, payload)
     .then((res) => {
         return res;
     })

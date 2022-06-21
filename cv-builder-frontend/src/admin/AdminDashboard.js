@@ -9,17 +9,7 @@ const AdminDashboard = (props) => {
 
     const { users, setUsers } = useContext(Context);
 
-    // useEffect(() => {
-    //     let allUsers = UserServices.GetAllUsers();
-    //     if(allUsers) {
-    //         setUsers(allUsers);
-    //     }
-    //     console.log(users)
-    // },[users])
 
-    // axios.get("http://localhost:4000" + "/app/users")
-    // .then(res => console.log(res.data))
-    // .catch(err => console.log(err))
 
     useEffect(() => {
         LoadPage();

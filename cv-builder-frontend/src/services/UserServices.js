@@ -11,8 +11,23 @@ const SignIn = async (payload) => {
     return response;
 }
 
-const GetAllUsers = async (payload) => {
-    let response = await restHelper.Get('/app/users', payload);
+const GetAllUsers = async () => {
+    let response = await restHelper.Get('/app/users');
+    return response;
+}
+
+const GetUser = async (id) => {
+    let response = await restHelper.Get(`/app/user/${id}`);
+    return response;
+}
+
+const UpdateUser = async (payload) => {
+    let response = await restHelper.Patch('/app/user', payload);
+    return response;
+}
+
+const DeleteUser = async (id,payload) => {
+    let response = await restHelper.Delete(`/app/user/${id}`, payload);
     return response;
 }
 
@@ -25,5 +40,8 @@ export const UserServices = {
     SignUp,
     SignIn,
     GetAllUsers,
+    GetUser,
+    UpdateUser,
+    DeleteUser,
     SetRecord
 }
